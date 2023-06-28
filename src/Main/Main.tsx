@@ -24,7 +24,7 @@ export const Main = (): JSX.Element => {
                         position: 'absolute',
                         // backgroundColor : 'rgba(0,0,0, 0.0)',
                         borderWidth: 0,
-                        elevation: 0,
+                        // elevation: 0,
                         // marginTop: 10
                     }
 
@@ -38,7 +38,7 @@ export const Main = (): JSX.Element => {
                         tabBarIcon: ({ color }) => (
                             <Icon
                                 color={color}
-                                size={20}
+                                size={25}
                                 name="home-outline"
                             />)
                     }}
@@ -50,7 +50,7 @@ export const Main = (): JSX.Element => {
                         tabBarIcon: ({ color }) => (
                             <Icon
                                 color={color}
-                                size={20}
+                                size={25}
                                 name="trophy-outline"
                             />)
                     }}
