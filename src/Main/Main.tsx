@@ -1,12 +1,64 @@
-import { View, } from "react-native";
-import { Header } from "../screens/Header";
-import { Task } from "../screens/Tasks";
+// import { View } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { Home } from "../screens/HomeScreen";
+import { Complete } from "../screens/Complete";
+import Icon from 'react-native-vector-icons/Ionicons'
+// import { Header } from "../screens/Header";
+// import { Task } from "../screens/Tasks";
+
+const Tab = createBottomTabNavigator();
 
 export const Main = (): JSX.Element => {
     return (
-        <View style={{ flex: 1 }}>
-            <Header />
-            <Task />
-        </View>
+        <NavigationContainer>
+            <Tab.Navigator
+                sceneContainerStyle={{
+                    backgroundColor: '#fff'
+                }}
+                screenOptions={{
+                    headerShown: false,
+                    tabBarActiveTintColor: '#6A1B9A',
+                    tabBarLabelStyle:{
+
+                    },
+                    tabBarStyle: {
+                        backgroundColor: '#000000',
+                        position: 'absolute',
+                        // backgroundColor : 'rgba(0,0,0, 0.0)',
+                        borderWidth: 0,
+                        elevation: 0,
+                        // marginTop: 10
+                    }
+
+                }}
+
+            >
+                <Tab.Screen
+                    name="Home"
+                    options={{
+                        tabBarLabel: 'Home',
+                        tabBarIcon: ({ color }) => (
+                            <Icon
+                                color={color}
+                                size={20}
+                                name="home-outline"
+                            />)
+                    }}
+                    component={Home} />
+                <Tab.Screen 
+                    name="Complete" 
+                    options={{
+                        tabBarLabel: 'Complete',
+                        tabBarIcon: ({ color }) => (
+                            <Icon
+                                color={color}
+                                size={20}
+                                name="trophy-outline"
+                            />)
+                    }}
+                    component={Complete} />
+            </Tab.Navigator>
+        </NavigationContainer>
     );
 };

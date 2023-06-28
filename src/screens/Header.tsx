@@ -19,12 +19,13 @@ export const Header = (): JSX.Element => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 3,
         backgroundColor: '#009688',
         justifyContent: 'center',
         // alignItems:'center',
         borderBottomLeftRadius: 40,
-        borderBottomRightRadius: 40
+        borderBottomRightRadius: 40,
+        // zIndex: 9999
     },
     taskStatus: {
         // backgroundColor: 'red',
