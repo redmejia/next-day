@@ -1,17 +1,36 @@
-import { StyleSheet, View, Text, Platform } from "react-native";
+import { StyleSheet, View, Text, Platform, TouchableOpacity } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export const Header = (): JSX.Element => {
 
     return (
         <View style={styles.container} >
             <View style={styles.buttonStatus} >
-                <Text> h </Text>
-                <Text> h </Text>
+                <TouchableOpacity>
+                    <Icon
+                        color={"#fff"}
+                        size={30}
+                        name="checkmark-done-outline"
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Icon
+                        color={"#fff"}
+                        size={30}
+                        name="pencil-outline"
+                    />
+                </TouchableOpacity>
             </View>
-
             <View style={styles.taskStatus}>
                 <Text style={styles.text}> Set Task For Today </Text>
-                <Text style={styles.text}> Set Task For Today </Text>
+            </View>
+            <View style={styles.headerTitle}>
+                <Text style={styles.headerText}> My Learning | My Tasks </Text>
+                <Icon
+                        color={"#fff"}
+                        size={30}
+                        name="chevron-down-outline"
+                    />
             </View>
         </View>
     );
@@ -29,13 +48,23 @@ const styles = StyleSheet.create({
     },
     taskStatus: {
         // backgroundColor: 'red',
-        marginTop: 90
+        marginTop: 95
     },
     text: {
         marginHorizontal: 10,
         color: '#fff',
         fontSize: 20,
 
+    },
+    headerTitle: {
+        marginTop: Platform.OS === 'ios' ? 38 : 20,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    headerText : {
+        color: '#fff',
+        fontWeight: '600',
+        fontSize: 15
     },
     buttonStatus: {
         top: Platform.OS === 'android' ? 12 : 55,
@@ -44,9 +73,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         right: 20,
         position: 'absolute',
-        backgroundColor: 'red',
-        width: 150,
-        height: 60
+        // backgroundColor: 'red',
+        width: 100,
+        height: 30
 
     }
 });

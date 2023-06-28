@@ -1,11 +1,8 @@
-// import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Home } from "../screens/HomeScreen";
 import { Complete } from "../screens/Complete";
 import Icon from 'react-native-vector-icons/Ionicons'
-// import { Header } from "../screens/Header";
-// import { Task } from "../screens/Tasks";
 
 const Tab = createBottomTabNavigator();
 
