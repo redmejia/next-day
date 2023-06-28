@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     box: {
-        height: 20,
+        height: 30,
         width: 10,
         backgroundColor: '#CAD2DB',
         borderRadius: 10,

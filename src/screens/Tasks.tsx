@@ -1,8 +1,7 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { TaskCardProps } from "../Components/TaskCard";
 import { LevelColor } from "../Context/labelLevelColor";
 import { ListRender } from "../Components/ListRender";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const data: TaskCardProps[] = [
     { labelColor: LevelColor.LOW, des: "des", name: "one" },
@@ -15,7 +14,7 @@ const data: TaskCardProps[] = [
     { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
     { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
     { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hoak" },
+    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hola" },
     { labelColor: LevelColor.LOW, des: "des", name: "one" },
     { labelColor: LevelColor.MEDIUM, des: "des", name: "dos" },
     { labelColor: LevelColor.HIGH, des: "des", name: "dos" },
@@ -26,7 +25,7 @@ const data: TaskCardProps[] = [
     { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
     { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
     { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hoak" },
+    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hola" },
 
 
 ]
@@ -41,7 +40,7 @@ export const Task = (): JSX.Element => {
 
 
                 <ScrollView
-                    contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
+                    contentContainerStyle={{  flexGrow: 1,  paddingBottom: 100 }}
                     showsVerticalScrollIndicator={false}
                 >
 
