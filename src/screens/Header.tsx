@@ -16,7 +16,7 @@ export const Header = (): JSX.Element => {
                 <TouchableOpacity>
                     <Icon
                         color={"#fff"}
-                        size={30}
+                        size={25}
                         name="pencil-outline"
                     />
                 </TouchableOpacity>
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     },
     taskStatus: {
         // backgroundColor: 'red',
-        marginTop: 95
+        // marginTop: 95,
+        top: 10,
     },
     text: {
         marginHorizontal: 10,
@@ -57,7 +58,9 @@ const styles = StyleSheet.create({
 
     },
     headerTitle: {
-        marginTop: Platform.OS === 'ios' ? 38 : 20,
+        // backgroundColor: 'red',
+        position:'relative',
+        top: Platform.OS === 'ios' ? 70 : 60,
         justifyContent: 'center',
         alignItems: 'center'
     },
