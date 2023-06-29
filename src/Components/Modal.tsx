@@ -20,8 +20,20 @@ const CloseButton = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
                 }}
             >
 
-                <Text style={styles.buttonText}> X </Text>
+                <Text style={styles.closeButtonText}> X </Text>
             </View>
+        </TouchableOpacity>
+    )
+}
+
+const AddButton = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
+    return (
+        <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => closeModal(isVisible)} // test this will take action
+            style={styles.addButton}
+        >
+            <Text style={styles.addButtonText}> + </Text>
         </TouchableOpacity>
     )
 }
@@ -31,7 +43,7 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
     return (
         <View style={styles.centeredView}>
             <Modal
-                animationType="slide"
+                animationType="fade"
                 transparent={true}
                 visible={isVisible}
             >
@@ -42,6 +54,8 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
                         <Text style={styles.modalText}>Hello World!</Text>
                         <Text style={styles.modalText}>Hello World!</Text>
                         <Text style={styles.modalText}>Hello World!</Text>
+                        <Text style={styles.modalText}>Hello World!</Text>
+                        <Text style={styles.modalText}>Hello World!</Text>
 
 
                     </View>
@@ -49,6 +63,16 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
                         closeModal={closeModal}
                         isVisible={isVisible}
                     />
+                    <View
+                        style={{ position: 'absolute', justifyContent: 'center', right: 20, alignItems: 'center', bottom: Platform.OS === 'ios' ? 100 : 70 }}
+                    >
+
+                        <AddButton
+                            isVisible={isVisible}
+                            closeModal={closeModal}
+                        />
+                    </View>
+
                 </View>
 
             </Modal>
@@ -88,9 +112,25 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 100,
-        // borderRadius: 20,
         padding: 2,
-        right: 19
+        left: 19
+    },
+    addButton: {
+        bottom: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        backgroundColor: '#2196F3',
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+
+    },
+    addButtonText: {
+        alignSelf: 'center',
+        fontWeight: '400',
+        fontSize: 30,
+        color: '#fff'
     },
     textStyle: {
         textAlign: 'center',
@@ -100,7 +140,7 @@ const styles = StyleSheet.create({
         color: '#fff'
 
     },
-    buttonText: {
+    closeButtonText: {
         fontWeight: '700',
         fontSize: 20,
         color: '#fff'
