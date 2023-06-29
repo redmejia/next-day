@@ -1,4 +1,5 @@
 import { View, Modal, StyleSheet, Pressable, Text, TouchableOpacity, Platform } from "react-native";
+import { LevelListRender } from "./LevelListRender";
 
 interface ModalProps {
     isVisible: boolean;
@@ -51,6 +52,7 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
                 <View style={styles.centeredView}>
 
                     <View style={styles.modalView}>
+                        <LevelListRender />
                         <Text style={styles.modalText}>Hello World!</Text>
                         <Text style={styles.modalText}>Hello World!</Text>
                         <Text style={styles.modalText}>Hello World!</Text>
