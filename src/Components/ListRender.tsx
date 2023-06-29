@@ -18,16 +18,20 @@ export const ListRender = ({ data, conteinerStyle, buttonStyle, onPresAction }: 
     return data.map((item, index) => {
 
         return (
-            <View 
+            <View
                 style={conteinerStyle}
                 key={index}
             >
                 <TouchableOpacity
-                    onPress={()=> onPresAction(index)}
+                    onPress={() => onPresAction(index)}
                     style={[styles.buttonCard, buttonStyle]}
                     activeOpacity={0.5}
                 >
-                    <TaskCard labelColor={item.labelColor}  name={item.name} des={item.des} />
+                    <TaskCard
+                        labelColor={item.labelColor}
+                        name={item.name} 
+                        des={item.des}
+                    />
                 </TouchableOpacity>
             </View>
         );
@@ -36,7 +40,7 @@ export const ListRender = ({ data, conteinerStyle, buttonStyle, onPresAction }: 
 };
 
 const styles = StyleSheet.create({
-    buttonCard : {
+    buttonCard: {
         marginVertical: 3,
     }
 });
