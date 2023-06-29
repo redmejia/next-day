@@ -5,6 +5,8 @@ import { TaskCardProps } from "../Components/TaskCard";
 import { LevelColor } from "../Context/labelLevelColor";
 import { ActionScrollList } from "../Components/ActionScrollList";
 import { ListRender } from "../Components/ListRender";
+import { ModalTask } from "../Components/Modal";
+import { useState } from "react";
 
 const data: TaskCardProps[] = [
     { labelColor: LevelColor.LOW, des: "des", name: "one" },
@@ -33,8 +35,16 @@ const data: TaskCardProps[] = [
 
 ]
 export const Home = (): JSX.Element => {
+    
+    const [isVisible, setModalVisible] = useState<boolean>(false)
+    
+    if (isVisible) {
+        return <ModalTask isVisible={isVisible} closeModal={setModalVisible} />
+    }
+
     return (
         <View style={{ flex: 1 }}>
+
             <Header
                 actionButton={
                     <View
@@ -78,12 +88,15 @@ export const Home = (): JSX.Element => {
 
                 }
                 actionButton={
+
                     <TouchableOpacity
                         activeOpacity={0.30}
+                        onPress={() => setModalVisible(true)}
                         style={styles.floatingButton}
                     >
                         {/* use Icon not text */}
                         <Text style={styles.buttonText}> + </Text>
+
                     </TouchableOpacity>
                 }
             />
@@ -132,9 +145,9 @@ const styles = StyleSheet.create({
 
         height: 50,
         width: 50,
-        borderRadius: 100,
-        backgroundColor: '#2196F3',
 
+        backgroundColor: '#2196F3',
+        borderRadius: 100,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
