@@ -79,7 +79,7 @@ export const Home = (): JSX.Element => {
                 }
                 actionButton={
                     <TouchableOpacity
-                        activeOpacity={0.10}
+                        activeOpacity={0.30}
                         style={styles.floatingButton}
                     >
                         {/* use Icon not text */}

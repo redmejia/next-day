@@ -5,10 +5,11 @@ export interface TaskCardProps {
     name?: string;
     des?: string;
     labelColor: string;
+
 }
 
 
-export const TaskCard = ({ name, des, labelColor = '#CAD2DB' }: TaskCardProps): JSX.Element => {
+export const TaskCard = ({ name, des, labelColor }: TaskCardProps): JSX.Element => {
     return (
         <View
             style={[styles.container, styles.containerDirection]}
@@ -19,7 +20,7 @@ export const TaskCard = ({ name, des, labelColor = '#CAD2DB' }: TaskCardProps): 
                     backgroundColor: labelColor
                 }}
             />
-            <View style={styles.boxInfo}>
+            <View style={styles.boxInfo }>
                 <Text style={styles.textName}>{name}</Text>
                 <Text style={styles.textDescription}>{des}</Text>
             </View>
