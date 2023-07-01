@@ -1,13 +1,18 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { LevelColor } from "../Context/labelLevelColor";
+import { Form } from "./Modal";
+import { Dispatch, SetStateAction } from "react";
 
 
 interface LevelProps {
-    stateFun: ()=>void;
-    action: (fn : Function, value: string) => void;
+    // stateFun: () => void;
+    dispatchSetAction: Dispatch<SetStateAction<Form>>
+    // action: (fn: ActionSelectColor, value: string)  =>  void
+    action: (fn:  Dispatch<SetStateAction<Form>>, value: string)  =>  void
 }
 
-export const LevelListRender = ({stateFun, action} : LevelProps): JSX.Element => {
+export const LevelListRender = ({ action, dispatchSetAction }: LevelProps): JSX.Element => {
+
 
 
     const level: LevelColor[] = [
@@ -16,13 +21,13 @@ export const LevelListRender = ({stateFun, action} : LevelProps): JSX.Element =>
         LevelColor.LOW,
     ]
 
-    
+
 
     const levelList = level.map((item, index) => {
 
         return (
             <TouchableOpacity key={index}
-                onPress={()=>action(stateFun, item)}
+                onPress={() => action(dispatchSetAction, item)}
             >
                 <View style={{
                     ...styles.levelBox,
@@ -35,7 +40,7 @@ export const LevelListRender = ({stateFun, action} : LevelProps): JSX.Element =>
 
     return (
         <View>
-            <Text style={{ textAlign: 'center', fontSize: 20,  }}>Select Level</Text>
+            <Text style={{ textAlign: 'center', fontSize: 20, }}>Select Level</Text>
             <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'space-around' }}>
                 <Text> High </Text>
                 <Text> Medium </Text>

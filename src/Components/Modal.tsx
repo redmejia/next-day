@@ -1,16 +1,11 @@
 import { View, Modal, StyleSheet, Pressable, Text, TouchableOpacity, Platform, TextInput, useWindowDimensions } from "react-native";
 import { LevelListRender } from "./LevelListRender";
-import { useCallback, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { TaskCard } from "./TaskCard";
 
 interface ModalProps {
     isVisible: boolean;
     closeModal: (close: boolean) => void
-}
-
-interface Form {
-    title: string;
-    description: string;
 }
 
 const CloseButton = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
@@ -46,12 +41,13 @@ const AddButton = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
     )
 }
 
-interface Form {
+export interface Form {
     title: string;
     description: string;
     levelColor?: string
 }
 
+// export type ActionSelectColor = (form : Form) => void;
 
 export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
 
@@ -59,9 +55,18 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
 
     const dim = useWindowDimensions()
 
-    const actionSelect = (fn: Function, value: string): void => {
-        fn(setForm({ ...form, levelColor: value }))
-    }
+
+
+
+    const onChangeColor = (fn:  Dispatch<SetStateAction<Form>>, value: string)  : void => {
+        
+        fn({...form, levelColor : value})
+
+    }   
+
+    // const actionSelect = (fn: Function, value: string): void => {
+    //     fn(setForm({ ...form, levelColor: value }))
+    // }
 
     const onChange = (value: string, field: string) => {
         setForm({
@@ -85,8 +90,8 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
 
                     <View style={styles.modalView}>
                         <LevelListRender
-                            stateFun={() => setForm}
-                            action={actionSelect}
+                            dispatchSetAction={setForm}
+                            action={onChangeColor}
                         />
                         <View style={{ width: dim.width - 50, marginTop: 10 }}>
                             <Text style={{ textAlign: 'center', fontSize: 20, }}> Task or Learning Short Decription</Text>
@@ -114,9 +119,9 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
                                         name={form.title}
                                         des={form.description}
                                         labelColor={form.levelColor}
-                                        boxContainer={{ width: dim.width - 90, height: 40}}
-                                        textTitleStyle={{fontSize: 15, fontWeight: '500'}}
-                                        desTitleStyle={{fontSize: 12, fontWeight: '300'}}
+                                        boxContainer={{ width: dim.width - 90, height: 40 }}
+                                        textTitleStyle={{ fontSize: 15, fontWeight: '500' }}
+                                        desTitleStyle={{ fontSize: 12, fontWeight: '300' }}
                                     /> : null
                             }
                         </View>
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
         margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
-        padding:35,
+        padding: 35,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
