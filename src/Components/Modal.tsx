@@ -1,9 +1,16 @@
-import { View, Modal, StyleSheet, Pressable, Text, TouchableOpacity, Platform } from "react-native";
+import { View, Modal, StyleSheet, Pressable, Text, TouchableOpacity, Platform, TextInput, useWindowDimensions } from "react-native";
 import { LevelListRender } from "./LevelListRender";
+import { useCallback, useState } from "react";
+import { TaskCard } from "./TaskCard";
 
 interface ModalProps {
     isVisible: boolean;
     closeModal: (close: boolean) => void
+}
+
+interface Form {
+    title: string;
+    description: string;
 }
 
 const CloseButton = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
@@ -39,34 +46,87 @@ const AddButton = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
     )
 }
 
+interface Form {
+    title: string;
+    description: string;
+    levelColor?: string
+}
+
+
 export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
+
+    const [form, setForm] = useState<Form>({ title: '', description: '', levelColor: '' })
+
+    const dim = useWindowDimensions()
+
+    const actionSelect = (fn: Function, value: string): void => {
+        fn(setForm({ ...form, levelColor: value }))
+    }
+
+    const onChange = (value: string, field: string) => {
+        setForm({
+            ...form,
+            [field]: value,
+        })
+    }
+
+    console.log(form);
+
 
     return (
         <View style={styles.centeredView}>
             <Modal
-                animationType="fade"
-                transparent={true}
+                animationType="slide"
+                transparent={false}
                 visible={isVisible}
             >
 
                 <View style={styles.centeredView}>
 
                     <View style={styles.modalView}>
-                        <LevelListRender />
-                        <Text style={styles.modalText}>Hello World!</Text>
-                        <Text style={styles.modalText}>Hello World!</Text>
-                        <Text style={styles.modalText}>Hello World!</Text>
-                        <Text style={styles.modalText}>Hello World!</Text>
-                        <Text style={styles.modalText}>Hello World!</Text>
-
-
+                        <LevelListRender
+                            stateFun={() => setForm}
+                            action={actionSelect}
+                        />
+                        <View style={{ width: dim.width - 50, marginTop: 10 }}>
+                            <Text style={{ textAlign: 'center', fontSize: 20, }}> Task or Learning Short Decription</Text>
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder='Title'
+                                autoCorrect={false}
+                                autoCapitalize="words"
+                                onChangeText={(value) => onChange(value, 'title')}
+                            />
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder='Description'
+                                autoCorrect={false}
+                                autoCapitalize="words"
+                                onChangeText={(value) => onChange(value, 'description')}
+                            />
+                        </View>
+                        <View
+                            style={{ width: dim.width - 20, margin: 10, alignItems: 'flex-start', justifyContent: 'flex-start' }}
+                        >
+                            {
+                                form.levelColor ?
+                                    <TaskCard
+                                        name={form.title}
+                                        des={form.description}
+                                        labelColor={form.levelColor}
+                                        boxContainer={{ width: dim.width - 90, height: 40}}
+                                        textTitleStyle={{fontSize: 15, fontWeight: '500'}}
+                                        desTitleStyle={{fontSize: 12, fontWeight: '300'}}
+                                    /> : null
+                            }
+                        </View>
                     </View>
                     <CloseButton
                         closeModal={closeModal}
                         isVisible={isVisible}
                     />
                     <View
-                        style={{ position: 'absolute', justifyContent: 'center', right: 20, alignItems: 'center', bottom: Platform.OS === 'ios' ? 100 : 70 }}
+                        style={styles.addButtonCotaniner}
                     >
 
                         <AddButton
@@ -75,8 +135,8 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
                         />
                     </View>
 
-                </View>
 
+                </View>
             </Modal>
 
 
@@ -96,7 +156,7 @@ const styles = StyleSheet.create({
         margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
-        padding: 35,
+        padding:35,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
@@ -116,6 +176,14 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         padding: 2,
         left: 19
+    },
+    addButtonCotaniner: {
+        position: 'relative',
+        justifyContent: 'center',
+        // right: 20,
+        alignItems: 'center',
+        // top: -50
+        // bottom: Platform.OS === 'ios' ? 100 : 70
     },
     addButton: {
         bottom: 10,
@@ -146,6 +214,14 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: 20,
         color: '#fff'
+    },
+    textInput: {
+        marginVertical: 2,
+        paddingVertical: 15,
+
+        borderBottomWidth: 1,
+        borderBottomColor: '#2196F3'
+
     },
     modalText: {
         marginBottom: 15,
