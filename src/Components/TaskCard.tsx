@@ -1,15 +1,20 @@
-import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { View, Text, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
 
 // export for test data
 export interface TaskCardProps {
     name?: string;
     des?: string;
-    labelColor: string;
+    labelColor?: string;
+
+    textTitleStyle?: StyleProp<TextStyle>;
+    desTitleStyle?: StyleProp<TextStyle>;
+
+    boxContainer?: StyleProp<ViewStyle>;
 
 }
 
 
-export const TaskCard = ({ name, des, labelColor }: TaskCardProps): JSX.Element => {
+export const TaskCard = ({ name, des, labelColor, boxContainer, textTitleStyle, desTitleStyle }: TaskCardProps): JSX.Element => {
     return (
         <View
             style={[styles.container, styles.containerDirection]}
@@ -20,9 +25,9 @@ export const TaskCard = ({ name, des, labelColor }: TaskCardProps): JSX.Element 
                     backgroundColor: labelColor
                 }}
             />
-            <View style={styles.boxInfo }>
-                <Text style={styles.textName}>{name}</Text>
-                <Text style={styles.textDescription}>{des}</Text>
+            <View style={[styles.boxInfo, boxContainer ]}>
+                <Text style={[styles.textName, textTitleStyle]}>{name}</Text>
+                <Text style={[styles.textDescription, desTitleStyle]}>{des}</Text>
             </View>
         </View>
     )

@@ -1,7 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { LevelColor } from "../Context/labelLevelColor";
 
-export const LevelListRender = (): JSX.Element => {
+
+interface LevelProps {
+    stateFun: ()=>void;
+    action: (fn : Function, value: string) => void;
+}
+
+export const LevelListRender = ({stateFun, action} : LevelProps): JSX.Element => {
+
 
     const level: LevelColor[] = [
         LevelColor.HIGH,
@@ -9,10 +16,14 @@ export const LevelListRender = (): JSX.Element => {
         LevelColor.LOW,
     ]
 
+    
+
     const levelList = level.map((item, index) => {
 
         return (
-            <TouchableOpacity key={index}>
+            <TouchableOpacity key={index}
+                onPress={()=>action(stateFun, item)}
+            >
                 <View style={{
                     ...styles.levelBox,
 
@@ -24,8 +35,8 @@ export const LevelListRender = (): JSX.Element => {
 
     return (
         <View>
-            <Text style={{ textAlign: 'center', fontSize: 20, }}>Select Level</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+            <Text style={{ textAlign: 'center', fontSize: 20,  }}>Select Level</Text>
+            <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'space-around' }}>
                 <Text> High </Text>
                 <Text> Medium </Text>
                 <Text> Low </Text>
