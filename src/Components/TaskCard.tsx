@@ -1,10 +1,9 @@
 import { View, Text, StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { Task } from "../Context/task";
 
 // export for test data
-export interface TaskCardProps {
-    name?: string;
-    des?: string;
-    labelColor?: string;
+interface TaskCardProps extends Task {
+  
 
     textTitleStyle?: StyleProp<TextStyle>;
     desTitleStyle?: StyleProp<TextStyle>;
@@ -14,7 +13,13 @@ export interface TaskCardProps {
 }
 
 
-export const TaskCard = ({ name, des, labelColor, boxContainer, textTitleStyle, desTitleStyle }: TaskCardProps): JSX.Element => {
+export const TaskCard = ({
+    title,
+    description,
+    levelColor,
+    boxContainer,
+    textTitleStyle,
+    desTitleStyle }: TaskCardProps): JSX.Element => {
     return (
         <View
             style={[styles.container, styles.containerDirection]}
@@ -22,12 +27,12 @@ export const TaskCard = ({ name, des, labelColor, boxContainer, textTitleStyle, 
             <View
                 style={{
                     ...styles.box,
-                    backgroundColor: labelColor
+                    backgroundColor: levelColor
                 }}
             />
-            <View style={[styles.boxInfo, boxContainer ]}>
-                <Text style={[styles.textName, textTitleStyle]}>{name}</Text>
-                <Text style={[styles.textDescription, desTitleStyle]}>{des}</Text>
+            <View style={[styles.boxInfo, boxContainer]}>
+                <Text style={[styles.textName, textTitleStyle]}>{title}</Text>
+                <Text style={[styles.textDescription, desTitleStyle]}>{description}</Text>
             </View>
         </View>
     )

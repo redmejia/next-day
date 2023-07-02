@@ -1,46 +1,23 @@
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Header } from "../Components/Header";
 import Icon from "react-native-vector-icons/Ionicons";
-import { TaskCardProps } from "../Components/TaskCard";
-import { LevelColor } from "../Context/labelLevelColor";
 import { ActionScrollList } from "../Components/ActionScrollList";
 import { ListRender } from "../Components/ListRender";
 import { ModalTask } from "../Components/Modal";
-import { useState } from "react";
-
-const data: TaskCardProps[] = [
-    { labelColor: LevelColor.LOW, des: "des", name: "one" },
-    { labelColor: LevelColor.MEDIUM, des: "des", name: "dos" },
-    { labelColor: LevelColor.HIGH, des: "des", name: "dos" },
-    { labelColor: LevelColor.LOW, des: "des", name: "dos" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.LOW, des: "des", name: "dos" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hola" },
-    { labelColor: LevelColor.LOW, des: "des", name: "one" },
-    { labelColor: LevelColor.MEDIUM, des: "des", name: "dos" },
-    { labelColor: LevelColor.HIGH, des: "des", name: "dos" },
-    { labelColor: LevelColor.LOW, des: "des", name: "dos" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.LOW, des: "des", name: "dos" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hello" },
-    { labelColor: LevelColor.HIGH, des: "This is a test", name: "hola" },
+import { useContext, useState } from "react";
+import { TaskContext } from "../Context/taskContext";
 
 
-]
 export const Home = (): JSX.Element => {
-    
+
     const [isVisible, setModalVisible] = useState<boolean>(false)
-    
+
+    const { mytask } = useContext(TaskContext)
+
     if (isVisible) {
         return <ModalTask isVisible={isVisible} closeModal={setModalVisible} />
     }
+
 
     return (
         <View style={{ flex: 1 }}>
@@ -55,7 +32,8 @@ export const Home = (): JSX.Element => {
                                 color={"#fff"}
                                 size={30}
                                 name="checkmark-done-outline" />
-                        </TouchableOpacity><TouchableOpacity>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
                             <Icon
                                 color={"#fff"}
                                 size={25}
@@ -83,7 +61,7 @@ export const Home = (): JSX.Element => {
                 renderListItems={
                     <ListRender
                         onPresAction={(value: number) => { console.log(value) }}
-                        data={data}
+                        data={mytask}
                     />
 
                 }
@@ -165,7 +143,5 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontSize: 30,
         color: '#fff'
-
-
     }
 });
