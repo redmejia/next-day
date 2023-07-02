@@ -9,13 +9,13 @@ interface ListRenderProps {
     conteinerStyle?: StyleProp<ViewStyle>;
     buttonStyle?: StyleProp<ViewStyle>;
 
-    onPresAction: (value: number) => void;
+    onPresAction?: (newTask : Task) => void;
 }
 
 
 // this is only for render task cards 
 // use the index for id or generate random number for ids
-export const ListRender = ({ data, conteinerStyle, buttonStyle, onPresAction }: ListRenderProps): JSX.Element[] => {
+export const ListRender = ({ data, conteinerStyle, buttonStyle, onPresAction  }: ListRenderProps): JSX.Element[] => {
     return data.map((item, index) => {
 
         return (
@@ -24,7 +24,8 @@ export const ListRender = ({ data, conteinerStyle, buttonStyle, onPresAction }: 
                 key={index}
             >
                 <TouchableOpacity
-                    onPress={() => onPresAction(index)}
+                    // if a function was passes to the props then execute that function
+                    onPress={() => onPresAction && onPresAction(item)}
                     style={[styles.buttonCard, buttonStyle]}
                     activeOpacity={0.5}
                 >

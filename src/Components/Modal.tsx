@@ -1,9 +1,9 @@
-import { View, Modal, StyleSheet, Pressable, Text, TouchableOpacity, Platform, TextInput, useWindowDimensions } from "react-native";
+import { View, Modal, StyleSheet, Text, TouchableOpacity, Platform, TextInput, useWindowDimensions } from "react-native";
 import { LevelListRender } from "./LevelListRender";
-import { Dispatch, SetStateAction, useCallback, useContext, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { TaskCard } from "./TaskCard";
 import { TaskContext } from "../Context/taskContext";
-import { Task } from "../Context/task";
+import { Task, genRandomId } from "../Context/task";
 
 interface ModalProps {
     isVisible: boolean;
@@ -62,9 +62,9 @@ export interface Form {
 
 export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element => {
 
-    const [form, setForm] = useState<Task>({ title: '', description: '', levelColor: '' })
+    const [form, setForm] = useState<Task>({ tskID: 0, title: '', description: '', levelColor: '' })
 
-    const { mytask, addNewTask } = useContext(TaskContext)
+    const { addNewTask } = useContext(TaskContext)
 
     const dim = useWindowDimensions()
 
@@ -72,8 +72,8 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
 
 
     const onChangeColor = (fn: Dispatch<SetStateAction<Task>>, value: string): void => {
-
-        fn({ ...form, levelColor: value })
+        let id : number = genRandomId()
+        fn({ ...form, tskID: id, levelColor: value })
 
     }
 
@@ -153,20 +153,7 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
                             addTask={addNewTask}
                             closeModal={closeModal}
                         />
-                        {/* <TouchableOpacity
-                            activeOpacity={1}
-                            onPress={() => {
-                                console.log("this was click");
-                                
-                                addNewTask(form)
-                            }} // test this will take action
-                            style={styles.addButton}
-                        >
-                            <Text style={styles.addButtonText}> + </Text>
-                        </TouchableOpacity> */}
                     </View>
-
-
                 </View>
             </Modal>
 
