@@ -1,10 +1,11 @@
 import { StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
-import { TaskCard, TaskCardProps } from "./TaskCard";
+import { TaskCard } from "./TaskCard";
 import React from "react";
+import { Task } from "../Context/task";
 
 
 interface ListRenderProps {
-    data: TaskCardProps[];
+    data: Task[];
     conteinerStyle?: StyleProp<ViewStyle>;
     buttonStyle?: StyleProp<ViewStyle>;
 
@@ -28,9 +29,9 @@ export const ListRender = ({ data, conteinerStyle, buttonStyle, onPresAction }: 
                     activeOpacity={0.5}
                 >
                     <TaskCard
-                        labelColor={item.labelColor}
-                        name={item.name} 
-                        des={item.des}
+                        levelColor={item.levelColor}
+                        title={item.title}
+                        description={item.description}
                     />
                 </TouchableOpacity>
             </View>

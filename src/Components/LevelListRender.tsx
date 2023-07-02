@@ -1,14 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { LevelColor } from "../Context/labelLevelColor";
-import { Form } from "./Modal";
 import { Dispatch, SetStateAction } from "react";
+import { Task } from "../Context/task";
 
 
 interface LevelProps {
     // stateFun: () => void;
-    dispatchSetAction: Dispatch<SetStateAction<Form>>
+    dispatchSetAction: Dispatch<SetStateAction<Task>>
     // action: (fn: ActionSelectColor, value: string)  =>  void
-    action: (fn:  Dispatch<SetStateAction<Form>>, value: string)  =>  void
+    action: (fn:  Dispatch<SetStateAction<Task>>, value: string)  =>  void
 }
 
 export const LevelListRender = ({ action, dispatchSetAction }: LevelProps): JSX.Element => {
