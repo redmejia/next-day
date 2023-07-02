@@ -6,13 +6,19 @@ import { ListRender } from "../Components/ListRender";
 import { ModalTask } from "../Components/Modal";
 import { useContext, useState } from "react";
 import { TaskContext } from "../Context/taskContext";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 
-export const Home = (): JSX.Element => {
+interface Props extends NativeStackScreenProps<any, any> { }
+
+export const Home = ({ navigation }: Props): JSX.Element => {
 
     const [isVisible, setModalVisible] = useState<boolean>(false)
 
-    const { mytask } = useContext(TaskContext)
+    const { mytask, onProgress } = useContext(TaskContext)
+
+    // const {navigate} = useNavigation()
+
 
     if (isVisible) {
         return <ModalTask isVisible={isVisible} closeModal={setModalVisible} />
@@ -23,17 +29,21 @@ export const Home = (): JSX.Element => {
         <View style={{ flex: 1 }}>
 
             <Header
+                containerBackgroundColor={onProgress.title.length !== 0 ? '#6A1B9A' : '#009688'}
                 actionButton={
                     <View
                         style={styles.actionButtons}
                     >
-                        <TouchableOpacity>
+                        {onProgress.title && <TouchableOpacity>
                             <Icon
                                 color={"#fff"}
                                 size={30}
                                 name="checkmark-done-outline" />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
+                        </TouchableOpacity>}
+
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Progress')}
+                        >
                             <Icon
                                 color={"#fff"}
                                 size={25}
@@ -42,15 +52,28 @@ export const Home = (): JSX.Element => {
                     </View>
                 }
                 actionText={
-                    <Text style={styles.actionText}>Start Task Or Learning</Text>
+                    <>
+                        {
+                            onProgress.title &&
+                            <Icon
+                                name="bicycle-outline"
+                                size={30}
+                                color={'#fff'}
+                                style={{ marginHorizontal: 10 }}
+                            />
+                        }
+                        {/* if you have title show task els NADA */}
+                        <Text style={styles.actionText}>{onProgress.title || ''} 
+                        </Text>
+                    </>
                 }
 
                 headerIndicator={
                     <View style={styles.headerTitle}>
-                        <Text style={styles.headerText}> My Learning | My Tasks </Text>
+                        <Text style={styles.headerText}> My Learning | Tasks </Text>
                         <Icon
                             color={"#fff"}
-                            size={30}
+                            size={25}
                             name="chevron-down-outline"
                         />
                     </View>
@@ -60,7 +83,6 @@ export const Home = (): JSX.Element => {
             <ActionScrollList
                 renderListItems={
                     <ListRender
-                        onPresAction={(value: number) => { console.log(value) }}
                         data={mytask}
                     />
 
@@ -104,7 +126,7 @@ const styles = StyleSheet.create({
     headerTitle: {
         // backgroundColor: 'red',
         position: 'relative',
-        top: Platform.OS === 'ios' ? 70 : 60,
+        top: Platform.OS === 'ios' ? 60 : 50,
         justifyContent: 'center',
         alignItems: 'center'
     },

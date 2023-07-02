@@ -1,3 +1,4 @@
 export enum ACTION {
     ADD_NEW_TASK = 'ADD_NEW_TASK',
+    ADD_TO_ON_PROGRESS = 'ADD_TO_ON_PROGRESS'
 }

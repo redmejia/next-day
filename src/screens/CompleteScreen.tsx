@@ -1,19 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Header } from "../Components/Header";
 import { ActionScrollList } from "../Components/ActionScrollList";
-import { TaskCardProps } from "../Components/TaskCard";
 import { LevelColor } from "../Context/labelLevelColor";
 import { ListRender } from "../Components/ListRender";
-const data: TaskCardProps[] = [
-  { labelColor: LevelColor.COMPLETE, des: "des", name: "one" },
-  { labelColor: LevelColor.COMPLETE, des: "des", name: "dos" },
-  { labelColor: LevelColor.COMPLETE, des: "des", name: "dos" },
-  { labelColor: LevelColor.COMPLETE, des: "des", name: "dos" },
-  { labelColor: LevelColor.COMPLETE, des: "This is a test", name: "hello" },
-  { labelColor: LevelColor.COMPLETE, des: "This is a test", name: "hello" },
+import { Task } from "../Context/task";
 
-
-
+const data: Task[] = [
+  { levelColor: LevelColor.COMPLETE, description: "des", title: "one" },
+  { levelColor: LevelColor.COMPLETE, description: "des", title: "dos" },
+  { levelColor: LevelColor.COMPLETE, description: "des", title: "dos" },
+  { levelColor: LevelColor.COMPLETE, description: "des", title: "dos" },
 ]
 
 
