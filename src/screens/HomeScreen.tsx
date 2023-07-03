@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {  Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Header } from "../Components/Header";
 import Icon from "react-native-vector-icons/Ionicons";
 import { ActionScrollList } from "../Components/ActionScrollList";
@@ -93,6 +93,7 @@ export const Home = ({ navigation }: Props): JSX.Element => {
             <ActionScrollList
                 renderListItems={
                     <ListRender
+                        onDeletAction={deleteTask}
                         data={mytask}
                     />
 

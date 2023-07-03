@@ -129,9 +129,12 @@ export const ModalTask = ({ isVisible, closeModal }: ModalProps): JSX.Element =>
                             {
                                 form.levelColor ?
                                     <TaskCard
+                                        tskID={form.tskID}
                                         title={form.title}
                                         description={form.description}
                                         levelColor={form.levelColor}
+                                        ellipsizeMod="tail"
+                                        numberOflines={1}
                                         boxContainer={{ width: dim.width - 90, height: 40 }}
                                         textTitleStyle={{ fontSize: 15, fontWeight: '500' }}
                                         desTitleStyle={{ fontSize: 12, fontWeight: '300' }}
