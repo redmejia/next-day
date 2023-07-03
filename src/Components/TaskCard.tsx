@@ -3,25 +3,33 @@ import { Task } from "../Context/task";
 
 // export for test data
 interface TaskCardProps extends Task {
-  
+
 
     textTitleStyle?: StyleProp<TextStyle>;
     desTitleStyle?: StyleProp<TextStyle>;
 
     boxContainer?: StyleProp<ViewStyle>;
 
+    ellipsizeMod?: 'tail' | 'head'
+    numberOflines?: number;
+
 }
 
 
 export const TaskCard = ({
+    tskID,
     title,
     description,
     levelColor,
     boxContainer,
     textTitleStyle,
-    desTitleStyle }: TaskCardProps): JSX.Element => {
+    desTitleStyle,
+    ellipsizeMod,
+    numberOflines
+}: TaskCardProps): JSX.Element => {
     return (
         <View
+            key={tskID}
             style={[styles.container, styles.containerDirection]}
         >
             <View
@@ -32,7 +40,13 @@ export const TaskCard = ({
             />
             <View style={[styles.boxInfo, boxContainer]}>
                 <Text style={[styles.textName, textTitleStyle]}>{title}</Text>
-                <Text style={[styles.textDescription, desTitleStyle]}>{description}</Text>
+                <Text
+                    ellipsizeMode={ellipsizeMod}
+                    numberOfLines={numberOflines}
+                    style={[styles.textDescription, desTitleStyle]}
+                >
+                    {description}
+                </Text>
             </View>
         </View>
     )

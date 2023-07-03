@@ -13,6 +13,7 @@ export interface TaskContextProps {
     markAsComplete: (completedTask: Task) => void;
     resetTask: () => void; // eset header to init state
     deleteTask: (taskId: number) => void; // delete  header to init state
+    deleteCompletedTask : (taskId : number) => void;
 }
 
 export const TaskContext = createContext({} as TaskContextProps);
@@ -44,6 +45,10 @@ export const TaskProvider = ({ children }: any) => {
         dispatch({ type : ACTION.DELETE_TASK, taskID : taskId})
     }
 
+   const deleteCompletedTask = (taskID: number) => {
+        dispatch({type: ACTION.DELETE_COMPLETED_TASK, taskID : taskID})
+   }
+
     return (
         <TaskContext.Provider value={{
             mytask: tasks.tasks,
@@ -53,7 +58,8 @@ export const TaskProvider = ({ children }: any) => {
             addToProgres,
             markAsComplete,
             resetTask,
-            deleteTask
+            deleteTask,
+            deleteCompletedTask,
         }}>
             {children}
         </TaskContext.Provider>

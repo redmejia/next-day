@@ -4,4 +4,5 @@ export enum ACTION {
     MARK_AS_COMPLETED = 'MARK_AS_COMPLETED',
     RESET_TASK = 'RESET_TASK', // reset header state no task set to  task {}
     DELETE_TASK = 'DELETE_TASK', // Delete task if is complete or delete from my task list
+    DELETE_COMPLETED_TASK = 'DELETE_COMPLETED_TASK',
 }

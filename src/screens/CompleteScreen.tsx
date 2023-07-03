@@ -9,7 +9,7 @@ import { TaskContext } from "../Context/taskContext";
 
 export const Complete = (): JSX.Element => {
 
-	const { completedTask } = useContext(TaskContext)
+	const { completedTask, deleteCompletedTask} = useContext(TaskContext)
 
 
 	return (
@@ -22,6 +22,7 @@ export const Complete = (): JSX.Element => {
 			<ActionScrollList
 				renderListItems={
 					<ListRender
+						onDeletAction={deleteCompletedTask}
 						data={completedTask}
 					/>
 				}

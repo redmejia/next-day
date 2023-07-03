@@ -9,6 +9,7 @@ type TaskAction =
     | { type: ACTION.MARK_AS_COMPLETED, payload: Task }
     | { type: ACTION.RESET_TASK, payload: Task }
     | { type: ACTION.DELETE_TASK, taskID: number }
+    | { type: ACTION.DELETE_COMPLETED_TASK, taskID: number }
 
 
 
@@ -61,10 +62,15 @@ export const taskReducer = (state: TaskState = initState, action: TaskAction) =>
         case ACTION.DELETE_TASK:
             return {
                 ...state,
-                tasks :  state.tasks.filter(task => task.tskID !== action.taskID)
+                tasks: state.tasks.filter(task => task.tskID !== action.taskID)
             }
-           
 
+        case ACTION.DELETE_COMPLETED_TASK:
+            return {
+                ...state,
+                completed : state.completed.filter(task => task.tskID !== action.taskID)
+            }
+        
         default:
             return state
     }
