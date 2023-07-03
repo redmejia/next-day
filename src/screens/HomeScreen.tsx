@@ -7,6 +7,7 @@ import { ModalTask } from "../Components/Modal";
 import { useContext, useState } from "react";
 import { TaskContext } from "../Context/taskContext";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { LevelColor } from "../Context/labelLevelColor";
 
 
 interface Props extends NativeStackScreenProps<any, any> { }
@@ -15,7 +16,7 @@ export const Home = ({ navigation }: Props): JSX.Element => {
 
     const [isVisible, setModalVisible] = useState<boolean>(false)
 
-    const { mytask, onProgress } = useContext(TaskContext)
+    const { mytask, onProgress, markAsComplete } = useContext(TaskContext)
 
     // const {navigate} = useNavigation()
 
@@ -23,6 +24,7 @@ export const Home = ({ navigation }: Props): JSX.Element => {
     if (isVisible) {
         return <ModalTask isVisible={isVisible} closeModal={setModalVisible} />
     }
+
 
 
     return (
@@ -34,12 +36,16 @@ export const Home = ({ navigation }: Props): JSX.Element => {
                     <View
                         style={styles.actionButtons}
                     >
-                        {onProgress.title && <TouchableOpacity>
-                            <Icon
-                                color={"#fff"}
-                                size={30}
-                                name="checkmark-done-outline" />
-                        </TouchableOpacity>}
+                        {
+                            onProgress.title && <TouchableOpacity
+                                onPress={()=> markAsComplete({...onProgress, levelColor : LevelColor.COMPLETE})}
+                            >
+                                <Icon
+                                    color={"#fff"}
+                                    size={30}
+                                    name="checkmark-done-outline" />
+                            </TouchableOpacity>
+                        }
 
                         <TouchableOpacity
                             onPress={() => navigation.navigate('Progress')}
@@ -63,7 +69,7 @@ export const Home = ({ navigation }: Props): JSX.Element => {
                             />
                         }
                         {/* if you have title show task els NADA */}
-                        <Text style={styles.actionText}>{onProgress.title || ''} 
+                        <Text style={styles.actionText}>{onProgress.title || ''}
                         </Text>
                     </>
                 }
