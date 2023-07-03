@@ -1,5 +1,5 @@
 export interface Task  {
-    tskID?: number,
+    tskID: number,
     title: string,
     description: string,
     levelColor: string,

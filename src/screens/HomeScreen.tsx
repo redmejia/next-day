@@ -16,7 +16,7 @@ export const Home = ({ navigation }: Props): JSX.Element => {
 
     const [isVisible, setModalVisible] = useState<boolean>(false)
 
-    const { mytask, onProgress, markAsComplete } = useContext(TaskContext)
+    const { mytask, onProgress, markAsComplete, resetTask, deleteTask } = useContext(TaskContext)
 
     // const {navigate} = useNavigation()
 
@@ -38,7 +38,11 @@ export const Home = ({ navigation }: Props): JSX.Element => {
                     >
                         {
                             onProgress.title && <TouchableOpacity
-                                onPress={()=> markAsComplete({...onProgress, levelColor : LevelColor.COMPLETE})}
+                                onPress={() => {
+                                    markAsComplete({ ...onProgress, levelColor: LevelColor.COMPLETE })
+                                    resetTask()
+                                    deleteTask(onProgress.tskID)
+                                }}
                             >
                                 <Icon
                                     color={"#fff"}

@@ -16,7 +16,7 @@ export const Complete = (): JSX.Element => {
 		<View style={styles.container}>
 			<Header
 				containerBackgroundColor="#2196F3"
-				actionText={<Text style={{ textAlign: 'center', fontSize: 30, color: '#fff' }}>Complete</Text>}
+				actionText={<Text style={{ textAlign: 'center', fontSize: 30, color: '#fff' }}>Completed</Text>}
 			/>
 
 			<ActionScrollList

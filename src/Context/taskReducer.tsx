@@ -7,6 +7,9 @@ type TaskAction =
     | { type: ACTION.ADD_NEW_TASK, payload: Task }
     | { type: ACTION.ADD_TO_ON_PROGRESS, payload: Task }
     | { type: ACTION.MARK_AS_COMPLETED, payload: Task }
+    | { type: ACTION.RESET_TASK, payload: Task }
+    | { type: ACTION.DELETE_TASK, taskID: number }
+
 
 
 
@@ -19,11 +22,12 @@ export interface TaskState {
 export const initState: TaskState = {
     tasks: [],
     onProgress: {
+        tskID: 0,
         title: "",
         description: "",
         levelColor: ""
     },
-    completed : []
+    completed: []
 }
 
 export const taskReducer = (state: TaskState = initState, action: TaskAction) => {
@@ -42,11 +46,25 @@ export const taskReducer = (state: TaskState = initState, action: TaskAction) =>
                 ...state,
                 onProgress: action.payload
             }
-        case ACTION.MARK_AS_COMPLETED: 
+        case ACTION.MARK_AS_COMPLETED:
             return {
                 ...state,
-                completed : [...state.completed, action.payload]
+                completed: [...state.completed, action.payload]
             }
+
+        case ACTION.RESET_TASK:
+            return {
+                ...state,
+                onProgress: action.payload
+            }
+
+        case ACTION.DELETE_TASK:
+            return {
+                ...state,
+                tasks :  state.tasks.filter(task => task.tskID !== action.taskID)
+            }
+           
+
         default:
             return state
     }
